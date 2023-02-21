@@ -8,11 +8,11 @@
         <Icon name="teenyicons:home-solid" class="w-6 h-6" />
         <span>Home</span>
       </NuxtLink>
-      <NuxtLink to="/movies" class="flex items-center gap-2">
+      <NuxtLink to="#" class="flex items-center gap-2">
         <Icon name="bxs:movie-play" class="w-6 h-6" />
         <span>Refresh map</span>
       </NuxtLink>
-      <NuxtLink to="/categorySearch" class="flex items-center gap-2">
+      <NuxtLink to="#" class="flex items-center gap-2">
         <Icon name="teenyicons:search-circle-solid" class="w-6 h-6" />
         <span>Logout</span>
       </NuxtLink>

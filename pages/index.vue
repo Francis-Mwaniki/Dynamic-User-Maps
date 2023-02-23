@@ -1,18 +1,16 @@
 <template>
- <div class="">
- <!-- import component map -->
-<Cords />
- </div>
+  <div>
+    <Test />
+  </div>
 </template>
 
 <script>
-import Cords from '../components/Cords.vue';
-
-
-
+//import DisplayMaps from "../components/DisplayMaps.vue";
+import Test from "../components/test.vue";
 
 export default {
-    name: "IndexPage",
-    components: { Cords }
-}
+  components: { Test },
+};
 </script>
+
+<style lang="scss" scoped></style>

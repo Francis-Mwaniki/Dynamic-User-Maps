@@ -1,5 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+//turn loading to false
+  loading: false,
   head: {
     title: 'nuxt2',
     htmlAttrs: {
@@ -17,6 +19,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [ '~/assets/css/main.css',],
 
+  
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     
 // Register your new plugin
@@ -28,7 +31,8 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [   'nuxt-leaflet','@nuxtjs/tailwindcss','nuxt-icon'],
+  modules: [   'nuxt-leaflet','@nuxtjs/tailwindcss'
+],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
 }

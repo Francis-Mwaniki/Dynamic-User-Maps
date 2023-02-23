@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
-        "GOOGLEMAPSAPIKEY"
+        "GOOGLEMAPSAPIKEY",
+        "supabase",
+        "superbase"
     ],
     "vue3snippets.enable-compile-vue-file-on-did-save-code": true
 }

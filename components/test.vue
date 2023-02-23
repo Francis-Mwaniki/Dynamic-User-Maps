@@ -61,10 +61,10 @@
           class=""
         />
       </span>
-      <span class="text-lg text-black" v-show="user"
+      <span class="text-lg text-black"
         >Please Allow Location Access on your device!
       </span>
-      <span class="text-lg text-black" v-show="user">Locations not Displayed!! </span>
+      <span class="text-lg text-black">Locations not Displayed!! </span>
     </div>
     <!-- footer with copyright Francis_pro and love emoji -->
     <div class="flex justify-center items-center text-black">

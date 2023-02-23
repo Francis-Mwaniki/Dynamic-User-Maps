@@ -24,7 +24,14 @@
           role="alert"
           v-show="user"
         >
-          {{ user }} created! -verify Email!
+          {{ user }} created!
+        </div>
+        <div
+          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+          role="alert"
+          v-show="user"
+        >
+          Please verify Email to procede!
         </div>
         <!-- warning alert -->
         <div
@@ -149,9 +156,11 @@
 
           <button
             type="submit"
-            class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+            class="block w-full rounded-lg px-5 py-3 text-sm font-medium text-white"
+            :class="loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-indigo-600'"
+            :disabled="loading"
           >
-            Sign up
+            {{ loading ? "Loading..." : "Sign Up" }}
           </button>
 
           <p class="text-center text-sm text-gray-500">
@@ -159,6 +168,9 @@
             <NuxtLink to="/Login" class="underline">Sign In</NuxtLink>
           </p>
         </form>
+        <div class="flex justify-center items-center text-black">
+          <span class="text-lg text-black">Made with ❤️ by Francis_pro</span>
+        </div>
       </div>
     </div>
   </main>
@@ -173,6 +185,7 @@ export default {
     return {
       email: "",
       user: "",
+      loading: false,
       password: "",
       confirm_password: "",
       err: "",
@@ -207,16 +220,19 @@ export default {
         this.err = "Email is invalid";
         return;
       }
-
+      this.loading = true;
       const { user, data, error } = await supabase.auth.signUp({
         email: this.email,
         password: this.password,
       });
       if (error) {
+        this.err = error.message;
+        this.loading = false;
         console.log(error);
       } else {
         this.user = data.user.email;
         setTimeout(() => {
+          this.loading = false;
           this.$router.push("/Login");
         }, 2000);
 

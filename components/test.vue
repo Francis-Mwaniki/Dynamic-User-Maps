@@ -1,49 +1,76 @@
 <template>
-  <div class="">
-    <div
-      class="md:justify-end flex md:items-center justify-start items-start text-black gap-5 px-6 md:px-32 py-3 md:py-5"
-      v-show="load"
-    >
-      <nuxt-link to="/Maps" class="flex items-center gap-2 bg-blue-600 rounded px-3 py-2">
-        <span class="text-white">Maps.</span>
-      </nuxt-link>
-      <button
-        class="flex items-center gap-2 bg-blue-600 rounded px-3 py-2 text-white"
-        @click="logout"
-      >
-        <span>Logout</span>
-      </button>
-      <button class="px-9 py-3 bg-red-600 rounded hidden">Login</button>
-    </div>
-    <div
-      class="flex flex-col justify-center items-center mx-auto my-2 rounded text-black"
-      v-show="load"
-    >
-      <!-- display my name -->
-      <!-- success alert  -->
+  <main class="">
+    <div class="" v-if="locs.length != 0">
       <div
-        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-        role="alert"
-        v-show="success"
+        class="md:justify-end flex md:items-center justify-start items-start text-black gap-5 px-6 md:px-32 py-3 md:py-5"
+        v-show="load"
       >
-        {{ success }}
+        <nuxt-link
+          to="/Maps"
+          class="flex items-center gap-2 bg-blue-600 rounded px-3 py-2"
+        >
+          <span class="text-white">Maps.</span>
+        </nuxt-link>
+        <button
+          class="flex items-center gap-2 bg-blue-600 rounded px-3 py-2 text-white"
+          @click="logout"
+        >
+          <span>Logout</span>
+        </button>
+        <button class="px-9 py-3 bg-red-600 rounded hidden">Login</button>
       </div>
-      <!-- warning alert -->
       <div
-        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        role="alert"
-        v-if="err"
+        class="flex flex-col justify-center items-center mx-auto my-2 rounded text-black"
+        v-show="load"
       >
-        {{ err }}!
-      </div>
-      <span class="text-lg text-black" v-show="user">Hi {{ email }}!</span>
+        <!-- display my name -->
+        <!-- success alert  -->
+        <div
+          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+          role="alert"
+          v-show="success"
+        >
+          {{ success }}
+        </div>
+        <!-- warning alert -->
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+          v-if="err"
+        >
+          {{ err }}!
+        </div>
+        <span class="text-lg text-black" v-show="user">Hi {{ email }}!</span>
 
-      <currentPlace :locs="locs" />
+        <currentPlace :locs="locs" />
+      </div>
+      <div v-if="!load">
+        <Loader :load="load" />
+      </div>
     </div>
-    <div v-if="!load">
-      <Loader :load="load" />
+    <!-- Warning card if locations are not displayed tell user to allow location on his device usng v-else -->
+    <div
+      class="flex flex-col justify-center items-center mx-auto my-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-md md:max-w-5xl"
+      v-else
+    >
+      <span class="text-lg text-black" v-show="user">Hi {{ email }}!</span>
+      <span class="">
+        <img
+          src="https://cdn.pixabay.com/photo/2018/07/30/15/00/carpenter-3572804__340.png"
+          alt=""
+          class=""
+        />
+      </span>
+      <span class="text-lg text-black" v-show="user"
+        >Please Allow Location Access on your device!
+      </span>
+      <span class="text-lg text-black" v-show="user">Locations not Displayed!! </span>
     </div>
-  </div>
+    <!-- footer with copyright Francis_pro and love emoji -->
+    <div class="flex justify-center items-center text-black">
+      <span class="text-lg text-black">Made with ❤️ by Francis_pro</span>
+    </div>
+  </main>
 </template>
 
 <script>

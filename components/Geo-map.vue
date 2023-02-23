@@ -1,7 +1,7 @@
 <template>
   <main>
     <div
-      class="md:justify-end flex md:items-center justify-start items-start text-white gap-5 px-6 md:px-32 py-3 md:py-5 bg-slate-600"
+      class="md:justify-end flex md:items-center justify-start items-start text-blue gap-5 px-6 md:px-32 py-3 md:py-5 bg-slate-50"
       v-show="load"
     >
       <nuxt-link to="/Category" class="flex items-center gap-2">
@@ -15,10 +15,7 @@
       </button>
       <button class="px-9 py-3 bg-red-600 rounded hidden">Login</button>
     </div>
-    <span class="flex justify-center items-center mx-auto text-lg text-pink-700"
-      >If the actual location isn't displayed consider requesting your user to
-      Refresh</span
-    >
+
     <div v-if="!load">
       <Loader :load="load" />
     </div>
@@ -76,8 +73,16 @@ export default {
   mounted() {
     setTimeout(() => {
       this.load = true;
-    }, 10000);
+    }, 4000);
   },
   components: { Loader },
 };
 </script>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
+* {
+  font-family: "Quantico", sans-serif;
+  transition: all 0.2s ease-in-out;
+  scroll-behavior: smooth;
+}
+</style>

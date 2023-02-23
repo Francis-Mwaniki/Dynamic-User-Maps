@@ -11,14 +11,6 @@
         <p class="sm:w-1/3 w-2/3 text-center text-white text-2xl">
           it's loading hold on.....
         </p>
-        <ClientOnly>
-          <button
-            class="btn-3 ring-1 ring-white hover:bg-slate-200 bg-gray-100 rounded-lg text-black font-bold py-2 px-4 mt-4"
-            @click="load = false"
-          >
-            Rollback
-          </button>
-        </ClientOnly>
       </div>
     </div>
   </div>

@@ -29,6 +29,13 @@
         >
           {{ user }} Logged In!
         </div>
+        <div
+          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+          role="alert"
+          v-show="user"
+        >
+          You're be redirected hold tight!
+        </div>
         <!-- warning alert -->
         <div
           class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -114,9 +121,11 @@
 
           <button
             type="submit"
-            class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+            class="block w-full rounded-lg px-5 py-3 text-sm font-medium text-white"
+            :class="loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-indigo-600'"
+            :disabled="loading"
           >
-            Sign in
+            {{ loading ? "Loading..." : "Sign In" }}
           </button>
 
           <p class="text-center text-sm text-gray-500">
@@ -124,6 +133,9 @@
             <Nuxt-Link to="/" class="underline">Sign up</Nuxt-Link>
           </p>
         </form>
+        <div class="flex justify-center items-center text-black">
+          <span class="text-lg text-black">Made with ❤️ by Francis_pro</span>
+        </div>
       </div>
     </div>
   </main>
@@ -141,6 +153,7 @@ export default {
       password: "",
       warn: "",
       err: "",
+      loading: false,
     };
   },
   components: {},
@@ -155,18 +168,20 @@ export default {
         alert("Password must be at least 8 characters long");
         return;
       }
-
+      this.loading = true;
       const { data, error } = await supabase.auth.signInWithPassword({
         email: this.email,
         password: this.password,
       });
       if (error) {
         this.err = error.message;
+        this.loading = false;
         console.log(error.message);
       } else {
         this.user = data.user.email;
         setTimeout(() => {
           this.$router.push("/Category");
+          this.loading = false;
         }, 2000);
 
         //this.$router.push("/Login");

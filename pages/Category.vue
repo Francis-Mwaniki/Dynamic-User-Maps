@@ -14,13 +14,13 @@
         <div class="mt-4 space-y-2">
           <nuxt-link
             class="block rounded-full border px-8 py-3 text-sm font-medium border-gray-500 bg-blue-700 text-gray-200"
-            to="/Main"
+            to="/Mailing"
           >
             Share your Location with your Buddy
           </nuxt-link>
           <nuxt-link
             class="block rounded-full border border-gray-500 px-8 py-3 text-sm font-medium text-gray-200 bg-blue-700"
-            to="/Maps"
+            to="/Main"
           >
             Track Buddy Location
           </nuxt-link>

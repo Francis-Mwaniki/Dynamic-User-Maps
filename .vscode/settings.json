@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
+        "axios",
         "GOOGLEMAPSAPIKEY",
+        "sendgrid",
         "supabase",
         "superbase"
     ],

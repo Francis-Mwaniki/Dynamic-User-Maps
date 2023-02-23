@@ -5,7 +5,7 @@
       v-show="load"
     >
       <nuxt-link to="/Maps" class="flex items-center gap-2">
-        <span>(----)</span>
+        <span>(----).</span>
       </nuxt-link>
       <nuxt-link to="#" class="flex items-center gap-2">
         <span>Login</span>

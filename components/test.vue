@@ -4,8 +4,8 @@
       class="md:justify-end flex md:items-center justify-start items-start text-white gap-5 px-6 md:px-32 py-3 md:py-5 bg-slate-900"
       v-show="load"
     >
-      <nuxt-link to="/" class="flex items-center gap-2">
-        <span>Home</span>
+      <nuxt-link to="/Maps" class="flex items-center gap-2">
+        <span>(----)</span>
       </nuxt-link>
       <nuxt-link to="#" class="flex items-center gap-2">
         <span>Login</span>

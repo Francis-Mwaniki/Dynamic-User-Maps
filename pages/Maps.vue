@@ -9,7 +9,7 @@
 import Cords from "../components/Cords.vue";
 
 export default {
-  name: "Administrator",
+  name: "Maps",
   components: { Cords },
 };
 </script>

@@ -202,10 +202,7 @@ export default {
       /* get user from supabase and check if email exists */
       const main_user = await supabase.auth.getUser();
       /* check if email of the texists  */
-      if (main_user) {
-        this.err = "Email already exists";
-        return;
-      }
+
       if (!this.email.includes("@")) {
         this.err = "Email is invalid";
         return;

@@ -17,7 +17,30 @@
       v-show="load"
     >
       <!-- display my name -->
-      <span class="text-lg text-white">Hi Francis!</span>
+      <div>
+        <form
+          action=""
+          class="flex mx-auto justify-center items-center ring-1 ring-white rounded p-1"
+          @submit.prevent="submit"
+          v-show="signing"
+        >
+          <label for="name" class="px-2 border-r border-white">Your name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            v-model="name"
+            class="bg-slate-900 text-white border-none outline-none focus:underline"
+          />
+          <button
+            type="submit"
+            class="bg-blue-700 text-white border-none outline-none focus:underline px-3 py-1 border-l border-white"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <span class="text-lg text-white">Hi {{ firstname }}!</span>
 
       <currentPlace :locs="locs" />
     </div>
@@ -40,8 +63,11 @@ export default {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0b3psd2dvZHJpZWlpdnZpbG5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkzNzQ2NDksImV4cCI6MTk4NDk1MDY0OX0.mCLYF2ZKas2hOfAUapacMUqysLPLgKfz3tRp99MrIYg"
       ),
       latitude: null,
+      name: "",
       longitude: null,
+      signing: true,
       load: false,
+      firstname: "",
       locs: [],
     };
   },
@@ -83,6 +109,12 @@ export default {
           console.error("Error adding location to Supabase:", error);
         });
     }, */
+    submit() {
+      this.firstname = this.name;
+      setTimeout(() => {
+        this.signing = false;
+      }, 1000);
+    },
 
     async listenForLocationChanges() {
       /* subscribe to new locations thro channel changes from supabase */

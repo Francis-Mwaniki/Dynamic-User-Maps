@@ -1,14 +1,15 @@
 <template>
   <div>
-    <Signup />
+    <Test />
   </div>
 </template>
 
 <script>
-import Signup from "../components/Signup.vue";
+//import DisplayMaps from "../components/DisplayMaps.vue";
+import Test from "../components/test.vue";
 
 export default {
-  components: { Signup },
+  components: { Test },
 };
 </script>
 

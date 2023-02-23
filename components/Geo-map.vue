@@ -4,15 +4,15 @@
       class="md:justify-end flex md:items-center justify-start items-start text-white gap-5 px-6 md:px-32 py-3 md:py-5 bg-slate-600"
       v-show="load"
     >
-      <nuxt-link to="/" class="flex items-center gap-2">
+      <nuxt-link to="/Category" class="flex items-center gap-2">
         <span>Home</span>
       </nuxt-link>
-      <nuxt-link to="#" class="flex items-center gap-2">
+      <button @click="refresh" class="flex items-center gap-2">
         <span>Refresh map</span>
-      </nuxt-link>
-      <nuxt-link to="#" class="flex items-center gap-2">
+      </button>
+      <button class="flex items-center gap-2" @click="logout">
         <span>Logout</span>
-      </nuxt-link>
+      </button>
       <button class="px-9 py-3 bg-red-600 rounded hidden">Login</button>
     </div>
     <span class="flex justify-center items-center mx-auto text-lg text-pink-700"
@@ -50,6 +50,13 @@ export default {
     };
   },
   methods: {
+    refresh() {
+      window.location.reload();
+    },
+    async logout() {
+      this.client.auth.signOut();
+      this.$router.push("/");
+    },
     /*  getLatestLocation() {
       this.client
         .from("locations")

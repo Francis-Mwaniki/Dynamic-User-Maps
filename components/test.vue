@@ -1,46 +1,42 @@
 <template>
-  <div class="bg-slate-900 min-h-screen">
+  <div class="">
     <div
-      class="md:justify-end flex md:items-center justify-start items-start text-white gap-5 px-6 md:px-32 py-3 md:py-5 bg-slate-900"
+      class="md:justify-end flex md:items-center justify-start items-start text-black gap-5 px-6 md:px-32 py-3 md:py-5"
       v-show="load"
     >
-      <nuxt-link to="/Maps" class="flex items-center gap-2">
-        <span>(----).</span>
+      <nuxt-link to="/Maps" class="flex items-center gap-2 bg-blue-600 rounded px-3 py-2">
+        <span class="text-white">Maps.</span>
       </nuxt-link>
-      <nuxt-link to="#" class="flex items-center gap-2">
-        <span>Login</span>
-      </nuxt-link>
+      <button
+        class="flex items-center gap-2 bg-blue-600 rounded px-3 py-2 text-white"
+        @click="logout"
+      >
+        <span>Logout</span>
+      </button>
       <button class="px-9 py-3 bg-red-600 rounded hidden">Login</button>
     </div>
     <div
-      class="flex flex-col justify-center items-center mx-auto my-2 rounded bg-slate-900 text-white"
+      class="flex flex-col justify-center items-center mx-auto my-2 rounded text-black"
       v-show="load"
     >
       <!-- display my name -->
-      <div>
-        <form
-          action=""
-          class="flex mx-auto justify-center items-center ring-1 ring-white rounded p-1"
-          @submit.prevent="submit"
-          v-show="signing"
-        >
-          <label for="name" class="px-2 border-r border-white">Your name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            v-model="name"
-            class="bg-slate-900 text-white border-none outline-none focus:underline"
-          />
-          <button
-            type="submit"
-            class="bg-blue-700 text-white border-none outline-none focus:underline px-3 py-1 border-l border-white"
-          >
-            Submit
-          </button>
-        </form>
+      <!-- success alert  -->
+      <div
+        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+        role="alert"
+        v-show="success"
+      >
+        {{ success }}
       </div>
-      <span class="text-lg text-white">Hi {{ firstname }}!</span>
+      <!-- warning alert -->
+      <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+        v-if="err"
+      >
+        {{ err }}!
+      </div>
+      <span class="text-lg text-black" v-show="user">Hi {{ email }}!</span>
 
       <currentPlace :locs="locs" />
     </div>
@@ -65,9 +61,12 @@ export default {
       latitude: null,
       name: "",
       longitude: null,
+      err: null,
+      success: null,
+      user: null,
       signing: true,
       load: false,
-      firstname: "",
+      email: "",
       locs: [],
     };
   },
@@ -109,11 +108,23 @@ export default {
           console.error("Error adding location to Supabase:", error);
         });
     }, */
-    submit() {
-      this.firstname = this.name;
-      setTimeout(() => {
-        this.signing = false;
-      }, 1000);
+    async getUser() {
+      const user = await this.client.auth.getUser();
+      this.email = user.data.user.email;
+      this.user = user;
+      console.log(user);
+    },
+    /* Signout user in supabase */
+    async logout() {
+      const { error } = await this.client.auth.signOut();
+      if (error) {
+        this.err = error.message;
+      } else {
+        this.success = "You have been logged out";
+        setTimeout(() => {
+          this.$router.push("/");
+        }, 2000);
+      }
     },
 
     async listenForLocationChanges() {
@@ -194,6 +205,7 @@ export default {
   mounted() {
     //this.setupMap();
     //   this.getCurrentPosition();
+    this.getUser();
     this.watchCurrentPosition();
     this.getCurrentPosition();
     setTimeout(() => {
